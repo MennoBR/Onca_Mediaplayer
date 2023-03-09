@@ -4,6 +4,7 @@
 import sys
 import os
 import subprocess
+import qdarkstyle
 from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import (
@@ -12,6 +13,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaPlaylist
 from PyQt5.QtMultimedia import QMediaContent
+
 
 class MediaPlayer(QWidget):
     def __init__(self):
@@ -22,6 +24,7 @@ class MediaPlayer(QWidget):
         self.media_player.setVolume(50)
         self.playlist = QMediaPlaylist(self.media_player)
         self.media_player.setPlaylist(self.playlist)
+        self.setGeometry(100, 100, 500, 500)
 
         # Configuring GUI:
         self.track_label = QLabel("No track selected")
@@ -51,22 +54,20 @@ class MediaPlayer(QWidget):
 
         # Add toolbar to left side
         toolbar = QVBoxLayout()
+        vbox.addLayout(toolbar)
         for format in ['MP3', 'MP4', 'Mpeg', 'MOV', 'Aiff']:
             button = QPushButton(format)
             toolbar.addWidget(button)
+
+        self.setLayout(vbox)
 
         # Manipulating logo:
         logo_label = QLabel(self)
         pixmap = QPixmap('Icon_black1.jpeg')
         logo_label.setPixmap(pixmap)
-        logo_label.setAlignment(Qt.AlignCenter)
-
-        toolbar_widget = QWidget()
-        toolbar_widget.setLayout(toolbar)
-        vbox.addWidget(logo_label, alignment=Qt.AlignCenter)
-        vbox.addWidget(toolbar_widget, alignment=Qt.AlignLeft)
-
-        self.setLayout(vbox)
+        logo_label.setFixedSize(pixmap.width(), pixmap.height())
+        self.setMinimumSize(pixmap.width(), pixmap.height())
+        self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
 
         # Setting application icon:
         app_icon = QIcon(pixmap)
@@ -100,11 +101,14 @@ class MediaPlayer(QWidget):
         subprocess.call(cmd, shell=True)
         return output_file
 
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    app.setStyleSheet(qdarkstyle.load_stylesheet())
     player = MediaPlayer()
     player.show()
     sys.exit(app.exec_())
+
 
 
 
