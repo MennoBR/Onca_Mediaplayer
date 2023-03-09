@@ -33,7 +33,7 @@ class MediaPlayer(QWidget):
         self.track_label.setStyleSheet("QLabel { background-color: grey; color: white; }")
 
         self.play_button = QPushButton("Play")
-        self.play_button.setMinimumWidth(50)
+        self.play_button.setMinimumWidth(80)
         self.pause_button = QPushButton("Pause")
         self.pause_button.setMinimumWidth(80)
         self.stop_button = QPushButton("Stop")
@@ -59,7 +59,7 @@ class MediaPlayer(QWidget):
         # Add toolbar
         toolbar = QVBoxLayout()
         vbox.addLayout(toolbar)
-        for format in ['MP3', 'MP4', 'Mpeg', 'MOV', 'Aiff', 'UPSCALE IMG']:
+        for format in ['MP3', 'MP4', 'Mpeg', 'MOV', 'Aiff']:
             button = QPushButton(format)
             button.setMinimumWidth(50)
             toolbar.addWidget(button)
