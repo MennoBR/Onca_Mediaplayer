@@ -16,6 +16,7 @@ from PyQt5.QtMultimedia import QMediaContent
 
 
 class MediaPlayer(QWidget):
+
     def __init__(self):
         super().__init__()
 
@@ -32,8 +33,11 @@ class MediaPlayer(QWidget):
         self.track_label.setStyleSheet("QLabel { background-color: grey; color: white; }")
 
         self.play_button = QPushButton("Play")
+        self.play_button.setMinimumWidth(50)
         self.pause_button = QPushButton("Pause")
+        self.pause_button.setMinimumWidth(80)
         self.stop_button = QPushButton("Stop")
+        self.stop_button.setMinimumWidth(80)
 
         hbox = QHBoxLayout()
         hbox.addWidget(self.play_button)
@@ -52,11 +56,12 @@ class MediaPlayer(QWidget):
         vbox.addLayout(hbox)
         vbox.addWidget(self.volume_slider)
 
-        # Add toolbar to left side
+        # Add toolbar
         toolbar = QVBoxLayout()
         vbox.addLayout(toolbar)
-        for format in ['MP3', 'MP4', 'Mpeg', 'MOV', 'Aiff']:
+        for format in ['MP3', 'MP4', 'Mpeg', 'MOV', 'Aiff', 'UPSCALE IMG']:
             button = QPushButton(format)
+            button.setMinimumWidth(50)
             toolbar.addWidget(button)
 
         self.setLayout(vbox)
@@ -77,6 +82,7 @@ class MediaPlayer(QWidget):
         self.play_button.clicked.connect(self.play)
         self.pause_button.clicked.connect(self.pause)
         self.stop_button.clicked.connect(self.stop)
+
 
     def play(self):
         file_name, _ = QFileDialog.getOpenFileName(self, "Open File", ".", "Media Files (*.mp3 *.mp4 *.mpeg)")
@@ -108,6 +114,11 @@ if __name__ == '__main__':
     player = MediaPlayer()
     player.show()
     sys.exit(app.exec_())
+
+
+
+
+
 
 
 
