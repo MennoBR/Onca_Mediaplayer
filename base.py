@@ -59,9 +59,9 @@ class MediaPlayer(QWidget):
         # Add toolbar
         toolbar = QVBoxLayout()
         vbox.addLayout(toolbar)
-        for format in ['MP3', 'MP4', 'Mpeg', 'MOV', 'Aiff']:
+        for format in ['MP3', 'MP4', 'Mpeg', 'MOV', 'Aiff', 'H264']:
             button = QPushButton(format)
-            button.setMinimumWidth(50)
+            button.setFixedWidth(40)
             toolbar.addWidget(button)
 
         self.setLayout(vbox)
