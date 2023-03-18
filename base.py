@@ -27,7 +27,7 @@ class MediaPlayer(QWidget):
         self.media_player.setPlaylist(self.playlist)
         self.setGeometry(100, 100, 500, 500)
 
-        # Configuring GUI:
+        # Configurando GUI:
         self.track_label = QLabel("No track selected")
         self.track_label.setAlignment(Qt.AlignCenter)
         self.track_label.setStyleSheet("QLabel { background-color: grey; color: white; }")
@@ -56,17 +56,31 @@ class MediaPlayer(QWidget):
         vbox.addLayout(hbox)
         vbox.addWidget(self.volume_slider)
 
-        # Add toolbar
+        # Custom toolbar(dobrada)
         toolbar = QVBoxLayout()
         vbox.addLayout(toolbar)
-        for format in ['MP3', 'MP4', 'Mpeg', 'MOV', 'Aiff', 'H264']:
+
+
+        button_row1_layout = QHBoxLayout()
+        button_row2_layout = QHBoxLayout()
+
+        for format in ['MP3', 'MP4', 'Mpeg']:
             button = QPushButton(format)
-            button.setFixedWidth(40)
-            toolbar.addWidget(button)
+            button.setFixedWidth(50)
+            button_row1_layout.addWidget(button)
+
+
+        for format in ['MOV', 'Aiff', 'H264']:
+            button = QPushButton(format)
+            button.setFixedWidth(50)
+            button_row2_layout.addWidget(button)
+
+        toolbar.addLayout(button_row1_layout)
+        toolbar.addLayout(button_row2_layout)
 
         self.setLayout(vbox)
 
-        # Manipulating logo:
+        # Manipulando logo:
         logo_label = QLabel(self)
         pixmap = QPixmap('Icon_black1.jpeg')
         logo_label.setPixmap(pixmap)
@@ -74,11 +88,11 @@ class MediaPlayer(QWidget):
         self.setMinimumSize(pixmap.width(), pixmap.height())
         self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
 
-        # Setting application icon:
+        # Icone de aplicação:
         app_icon = QIcon(pixmap)
         self.setWindowIcon(app_icon)
 
-        # Connecting buttons:
+        # Conectando butões:
         self.play_button.clicked.connect(self.play)
         self.pause_button.clicked.connect(self.pause)
         self.stop_button.clicked.connect(self.stop)
