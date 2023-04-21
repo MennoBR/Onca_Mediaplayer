@@ -88,6 +88,10 @@ class MediaPlayer(QWidget):
         self.setMinimumSize(pixmap.width(), pixmap.height())
         self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
 
+        logo_label.setMaximumSize(self.width() // 2, self.height() // 2)
+
+        self.logo_label = logo_label
+
         # Icone de aplicação:
         app_icon = QIcon(pixmap)
         self.setWindowIcon(app_icon)
@@ -106,6 +110,8 @@ class MediaPlayer(QWidget):
             self.playlist.addMedia(QMediaContent(QUrl.fromLocalFile(file_name)))
             self.media_player.play()
             self.track_label.setText(file_name)
+
+        self.logo_label.hide()
 
     def pause(self):
         self.media_player.pause()
